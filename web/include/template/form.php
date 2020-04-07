@@ -95,20 +95,6 @@ use PHPSimpleWebScraper\Utility\Utility;
                     </p>
                 </div>
             </div>
-            <div class="content has-text-centered">
-                <p>
-                    <?php
-                    $_sMessage = 'You can create your own proxy scraper.' . '&#13;'
-                        . 'Available on GitHub.';
-                    echo '<a href="' . Registry::PROGRAM_URI . '" target="_blank" title="' . $_sMessage . '">'
-                        . Registry::NAME . ' ' . Registry::VERSION
-                        . '</a>&nbsp;';
-                    echo sprintf(
-                        Utility::getCopyRight( '%1$s', 2018 ),
-                        '<a href="' . Registry::AUTHOR_URI . '" target="_blank">' . Registry::AUTHOR . "</a>"
-                    ); ?>
-                </p>
-            </div>
         </footer>           
     </div><!-- .container -->
     <script async defer src="asset/github-buttons/buttons.js"></script>

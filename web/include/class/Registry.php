@@ -9,9 +9,9 @@ namespace PHPSimpleWebScraper;
  */
 class Registry {
 
-    const NAME              = 'Simple Web Scraper';
+    const NAME              = 'Scraper';
     const SLUG              = 'SimpleWebScraper';
-    const SUBTITLE          = 'Fetches even JavaScript generated contents.';
+    const SUBTITLE          = 'Even fetches JavaScript generated contents.';
     const DESCRIPTION       = 'A web page content proxy scraper, supporting JavaScript generated contents, a cross domain solution.';
     const PROGRAM_URI       = 'https://github.com/michaeluno/php-simple-web-scraper';
     const VERSION           = '1.4.3';

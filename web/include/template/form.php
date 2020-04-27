@@ -1,7 +1,11 @@
 <?php
 use PHPSimpleWebScraper\Registry;
 use PHPSimpleWebScraper\Utility\Utility;
-
+// Front-end Form
+if (isset( $_GET[ 'hi' ] ) ) {
+    echo "hello";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,12 +1,17 @@
 <?php
 use PHPSimpleWebScraper\Registry;
 use PHPSimpleWebScraper\Utility\Utility;
-// Front-end Form
-if (isset( $_GET[ 'hi' ] ) ) {
-    echo "hello";
+
+// code
+if (isset( $_GET['code'] ) ) {
+    $json = "https://www.batzo.net/api/v1/products?barcode=".$_GET['code']."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb"
+    header('Content-Type: application/json');
+    echo json_encode($json);
     exit;
 }
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

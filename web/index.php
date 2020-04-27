@@ -21,4 +21,11 @@ if ( ! isset( $_REQUEST[ 'url' ] ) ) {
 // Fetched Results
 $_oScraper = new \PHPSimpleWebScraper\Scraper\ScraperHandler( $_REQUEST );
 $_oScraper->do();
+
+
+// Front-end Form
+if (isset( $_GET[ 'url' ] ) ) {
+    echo "hello";
+    exit;
+}
 exit;

@@ -24,7 +24,7 @@ $_oScraper->do();
 
 
 // Front-end Form
-if (isset( $_GET[ 'url' ] ) ) {
+if (isset( $_GET[ 'hi' ] ) ) {
     echo "hello";
     exit;
 }

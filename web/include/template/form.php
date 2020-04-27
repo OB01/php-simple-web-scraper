@@ -6,7 +6,7 @@ use PHPSimpleWebScraper\Utility\Utility;
 if (isset( $_GET['code'] ) ) {
     $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$_GET['code']."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
     header('Content-Type: application/json');
-    echo json_encode($json);
+    echo $json;
     exit;
 }
 

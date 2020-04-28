@@ -1,15 +1,18 @@
 <?php
-    $links = parse_ini_file('codes.ini');
+    $file = 'codes.ini';
+    $codes = parse_ini_file($file);
+    header('Content-Type: application/json');
 
-    if(isset($_GET['code']) && array_key_exists($_GET['code'], $links)){
-        header('Location: ' . $links[$_GET['code']]);
+    if(isset($_GET['code']) && array_key_exists($_GET['code'], $codes)){
+        echo $codes[$_GET['code']];
     }
     else{
-        header('HTTP/1.0 404 Not Found');
-        echo 'Unknown link.';
+        if (isset($_GET['code']) && strlen($_GET['code'])===13) {
+            $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$_GET['code']."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
+            echo $json;
+            $codes[$code] = $json;
+            write_ini_file($codes, $file);
+            exit;
+        };
     };
-
-    $key='option';
-    $val='1.2.3.4.5';
-    system("sed  -ie  's/\({$key}=\)\(.*\)/\1{$val}/' codefile.ini");
 ?>

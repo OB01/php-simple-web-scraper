@@ -21,14 +21,4 @@ echo $link;
 
 echo 'request '.$request;
 
-if($_GET){
-
-    echo 'get '.$_GET;
-
-    if (strlen($_GET)==13) {
-        $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$request."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
-        //header('Content-Type: application/json');
-        echo $json;
-    };
-}:
 ?> 

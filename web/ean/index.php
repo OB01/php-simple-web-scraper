@@ -1,5 +1,5 @@
 <?php 
-// Program to display URL of current page. 
+header('Content-Type: application/json');
   
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') 
     $link = "https"; 
@@ -22,4 +22,8 @@ $q = $_SERVER["QUERY_STRING"] ? $_SERVER["QUERY_STRING"] : false;
 
 echo 'get '.$q;
 
+if ($q && strlen($q)==13) {
+    $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$q."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
+    echo $json;
+};
 ?> 

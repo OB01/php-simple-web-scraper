@@ -7,5 +7,9 @@
     else{
         header('HTTP/1.0 404 Not Found');
         echo 'Unknown link.';
-    }
+    };
+
+    $key='option';
+    $val='1.2.3.4.5';
+    system("sed  -ie  's/\({$key}=\)\(.*\)/\1{$val}/' codefile.ini");
 ?>

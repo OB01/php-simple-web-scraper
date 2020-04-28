@@ -45,17 +45,29 @@
       <pre><code id="result"></code></pre>
     </section>
 
-    <footer class="footer">
-      <section class="container">
-        <p>ZXing TypeScript Demo. Licensed under the <a target="_blank"
-            href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
-      </section>
-    </footer>
+    <footer class="footer">2020</footer>
 
   </main>
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
+
+  function loadData(url callback){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            callback(xhr);
+        } else {
+            callback(false);
+        }
+    };
+    xhr.open('GET', url);
+    xhr.send();
+  };
+  loadData("http://key-chain.herokuapp.com/ean/?8713439215717", function(xhr) {
+        console.log(xhr);
+    });
+
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
@@ -89,6 +101,8 @@
                 
                 document.querySelector('#search input[type=text]').value = result.text;
                 document.querySelector('#search button').click();
+
+
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)

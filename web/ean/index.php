@@ -8,7 +8,7 @@
     }
     else{
         if (isset($_GET) && strlen($_GET)===13) {
-            $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$_GET['code']."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
+            $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$_GET."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
             echo $json;
             $codes[$code] = $json;
             write_ini_file($codes, $file);

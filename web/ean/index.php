@@ -13,12 +13,20 @@ $link .= "://";
 $link .= $_SERVER['HTTP_HOST']; 
   
 // Append the requested resource location to the URL 
-$request = $_SERVER['REQUEST_URI'];
-$link .= $request; 
+$link .= $_SERVER['REQUEST_URI']; 
       
 // Print the link 
 echo $link; 
 
-echo 'request '.$request;
+if($_SERVER["QUERY_STRING"]){
 
+    $q = $_SERVER["QUERY_STRING"];
+    echo 'get '.$q;
+
+    if (strlen($q)==13) {
+        $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$q."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
+        //header('Content-Type: application/json');
+        echo $json;
+    };
+}:
 ?> 

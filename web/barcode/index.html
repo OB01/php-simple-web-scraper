@@ -65,12 +65,13 @@
           const sourceSelect = document.getElementById('sourceSelect')
           selectedDeviceId = videoInputDevices[0].deviceId
           if (videoInputDevices.length >= 1) {
-            videoInputDevices.forEach((element) => {
+            for (var i = videoInputDevices.length - 1; i >= 0; i--) {
+              const element = videoInputDevices[i];
               const sourceOption = document.createElement('option')
               sourceOption.text = element.label
               sourceOption.value = element.deviceId
               sourceSelect.appendChild(sourceOption)
-            })
+            }
 
             sourceSelect.onchange = () => {
               selectedDeviceId = sourceSelect.value;

@@ -18,15 +18,8 @@ $link .= $_SERVER['REQUEST_URI'];
 // Print the link 
 echo $link; 
 
-if($_SERVER["QUERY_STRING"]){
+$q = $_SERVER["QUERY_STRING"] ? $_SERVER["QUERY_STRING"] : false;
 
-    $q = $_SERVER["QUERY_STRING"];
-    echo 'get '.$q;
+echo 'get '.$q;
 
-    if (strlen($q)==13) {
-        $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$q."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
-        //header('Content-Type: application/json');
-        echo $json;
-    };
-}:
 ?> 

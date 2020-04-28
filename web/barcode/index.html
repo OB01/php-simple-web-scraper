@@ -86,8 +86,8 @@
                 console.log(result)
                 document.getElementById('result').textContent = result.text
                 
-                document.querySelectorAll('#search input[type=text]').value = result.text;
-                document.querySelectorAll('#search button').click();
+                document.querySelector('#search input[type=text]').value = result.text;
+                document.querySelector('#search button').click();
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)

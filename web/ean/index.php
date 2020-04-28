@@ -7,7 +7,7 @@
         echo $codes[$_GET['code']];
     }
     else{
-        if (isset($_GET['code']) && strlen($_GET['code'])===13) {
+        if (isset($_GET['code']) && strlen($_GET['code'])==13) {
             $json = file_get_contents("https://www.batzo.net/api/v1/products?barcode=".$_GET['code']."&key=137KgWcLdudxbneOrk8IkJfA5Hm9nEzedHOb");
             header('Content-Type: application/json');
             echo $json;
@@ -17,7 +17,7 @@
         }
         else{
             header('HTTP/1.0 404 Not Found');
-            echo 'Unknown code.';
+            echo 'Unknown code: '.$_GET['code'];
         };
     };
 ?>

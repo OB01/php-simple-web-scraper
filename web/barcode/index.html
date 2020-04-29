@@ -61,7 +61,6 @@
     function loadData(url, callback){
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
-            console.log('api response: '+xhr);
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(xhr);
             } else {
@@ -106,7 +105,7 @@
                 if(!isNaN(result.text) && result.text.length === 13){
                     console.log('scan code is 13 digits');
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
-                        console.log('load response: '+xhr);
+                        console.log('load response: '+JSON.stringify(xhr);
                         if(!!xhr && !!xhr.responseText){
                             console.log('xhr response: '+xhr.responseText);
                             var data = JSON.parse(xhr.responseText);

@@ -97,7 +97,6 @@
                 document.getElementById('result').textContent = result.text
                 
                 // Load external data
-                if(!isNaN(result.text) && result.text.length == 13){
                     loadData("http://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
                         var data = JSON.parse(xhr.responseText);
                         console.log(data["name"].en);
@@ -108,7 +107,6 @@
                             document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
                         };
                     });
-                };
 
                 // Search google
                 document.querySelector('#search input[type=text]').value = result.text;

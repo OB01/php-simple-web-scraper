@@ -64,7 +64,7 @@
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(xhr);
             } else {
-                callback(false);
+                callback("No Data");
             }
         };
         xhr.open('GET', url);

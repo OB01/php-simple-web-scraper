@@ -61,10 +61,8 @@
     function loadData(url, callback){
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
-            console.log('response: '+xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(xhr);
-                console.log('response: '+xhr.responseText);
             } else {
                 callback(false);
             }
@@ -101,38 +99,33 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
                 // Print result
-                document.getElementById('result').textContent = result.text;
-                console.log('scanned: '+result.text);
+                document.getElementById('result').textContent = result.text
+                
                 // Load external data
-                if(!isNaN(result.text) && result.text.length === 13){
-                    console.log('scan code is 13 digits');
+                if(!isNaN(result.text) && result.text.length == 13){
+
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
-                        console.log('load response: '+xhr.responseText);
-                        if(!xhr || !xhr.responseText){
-                            console.log("api didn't respond");
-                            searchGoogle(result.text);
-                        }
-                        else{
-                            console.log('xhr response: '+xhr.responseText);
+                        if(xhr && xhr.responseText){
+                            console.log(xhr.responseText);
                             var data = JSON.parse(xhr.responseText);
-                            if(data["errors"]){
-                                console.log(data["errors"]);
-                                searchGoogle(result.text);
-                            }
-                            else{
+                            if(!data["errors"]){
                                 var item = data["name"].en;
-                                console.log('name is: '+item);
-                                searchGoogle(item);
                                 var node = document.createElement("h2");
                                 var textnode = document.createTextNode(item); 
                                 node.appendChild(textnode);   
-                                document.getElementById("demo-content").insertBefore(node, document.getElementById("search"));
+                                document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
+                                searchGoogle(item);
+                            }
+                            else{
+                                searchGoogle(result.text);
                             };
+                        }
+                        else{
+                            searchGoogle(result.text);
                         };
                     });
                 }
                 else{
-                    console.log("scan code is not 13 digits");
                     searchGoogle(result.text);
                 };
               }
@@ -157,10 +150,10 @@
         })
     })
   </script>
-
+<!--
 <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
-
+-->
 </body>
 
 </html>

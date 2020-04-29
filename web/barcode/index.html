@@ -66,10 +66,10 @@
   };
     loadData("http://key-chain.herokuapp.com/ean/?8713439215717", function(xhr) {
         var data = JSON.parse(xhr.responseText);
-        console.log(data["name"]);
+        console.log(data["name"].en);
         if(!data["errors"]){
             var node = document.createElement("h2");
-            var textnode = document.createTextNode(data["name"]); 
+            var textnode = document.createTextNode(data["name"].en); 
             node.appendChild(textnode);   
             document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
         };

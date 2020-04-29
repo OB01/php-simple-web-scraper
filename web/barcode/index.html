@@ -21,7 +21,7 @@
   <main class="wrapper" style="padding-top:2em">
 
     <section class="container" id="demo-content">
-      <h1 class="title">Search</h1>
+        <h1 class="title">Search</h1>
 
       <script async src="https://cse.google.com/cse.js?cx=001284644462610681220:siulgbpdjku"></script>
       <div id="search" class="gcse-search"></div>
@@ -64,8 +64,15 @@
     xhr.open('GET', url);
     xhr.send();
   };
-  loadData("http://key-chain.herokuapp.com/ean/?8713439215717", function(xhr) {
-        console.log(xhr.responseText);
+    loadData("http://key-chain.herokuapp.com/ean/?8713439215717", function(xhr) {
+        var data = JSON.parse(xhr.responseText);
+        console.log(data["name"]);
+        if(!data["errors"]){
+            var node = document.createElement("h2");
+            var textnode = document.createTextNode(data["name"]); 
+            node.appendChild(textnode);   
+            document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
+        };
     });
 
     window.addEventListener('load', function () {

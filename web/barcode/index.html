@@ -106,7 +106,7 @@
                     console.log('scan code is 13 digits');
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
                         if(xhr && xhr.responseText){
-                            console.log('api response: 'xhr.responseText);
+                            console.log('api response: '+xhr.responseText);
                             var data = JSON.parse(xhr.responseText);
                             if(data && data["name"]){
                                 var item = data["name"].en;

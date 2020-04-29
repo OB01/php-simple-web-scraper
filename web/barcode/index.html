@@ -115,8 +115,8 @@
                         else{
                             console.log('xhr response: '+xhr.responseText);
                             var data = JSON.parse(xhr.responseText);
-                            if(!data || !data["name"]){
-                                console.log('name not found');
+                            if(data["errors"]){
+                                console.log(data["errors"]);
                                 searchGoogle(result.text);
                             }
                             else{

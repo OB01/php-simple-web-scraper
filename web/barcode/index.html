@@ -122,12 +122,12 @@
                     console.log('scan code is 13 digits');
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
                         console.log('load response: '+xhr.responseText);
-                        if(!xhr || !xhr.responseText || isEmpty(xhr.responseText)){
+                        if(!xhr){
                             console.log("api didn't respond");
                             searchGoogle(result.text);
                         }
                         else{
-                            var data = xhr.responseText;
+                            var data = xhr;
                             console.log('xhr response: '+xhr.responseText);
                             
                             if(!data || !data["name"] || isEmpty(data["name"])){

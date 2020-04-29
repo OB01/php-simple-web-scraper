@@ -69,6 +69,7 @@
         xhr.onload = function () {
             console.log('response code: '+xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
+                console.log(isEmpty(xhr.responseText));
                 var data = JSON.parse(xhr.responseText);
                 if (data) {
                     console.log('data found');

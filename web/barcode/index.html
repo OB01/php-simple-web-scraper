@@ -105,7 +105,7 @@
                 if(!isNaN(result.text) && result.text.length == 13){
 
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
-                        if(xhr){
+                        if(xhr && xhr.responseText){
                             var data = JSON.parse(xhr.responseText);
                             if(!data["errors"]){
                                 var item = data["name"].en;

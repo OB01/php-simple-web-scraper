@@ -105,6 +105,7 @@
                 if(!isNaN(result.text) && result.text.length === 13){
                     console.log('scan code is 13 digits');
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
+                        console.log('load response: '+xhr);
                         if(!!xhr && !!xhr.responseText){
                             console.log('api response: '+xhr.responseText);
                             var data = JSON.parse(xhr.responseText);

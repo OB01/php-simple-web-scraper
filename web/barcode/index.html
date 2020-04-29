@@ -96,7 +96,7 @@
                     xhr.open('GET', url);
                     xhr.send();
                 };
-                loadData("http://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
+                loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
                     if(xhr){
                         var data = JSON.parse(xhr.responseText);
                         console.log(data["name"].en);
@@ -134,7 +134,7 @@
         })
     })
   </script>
-  
+
 <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
 </body>

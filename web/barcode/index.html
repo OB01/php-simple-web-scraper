@@ -62,7 +62,7 @@
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
-                if (xhr.responseText != "") {
+                if (xhr.responseText && xhr.responseText.length != 0) {
                     callback(xhr);
                 } else {
                     callback(false);

@@ -64,6 +64,7 @@
             console.log('response: '+xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(xhr);
+                console.log('response: '+xhr.responseText);
             } else {
                 callback(false);
             }

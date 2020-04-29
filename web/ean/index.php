@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: application/json');
 
-$q = $_SERVER["QUERY_STRING"] ? $_SERVER["QUERY_STRING"] : false;
+$q = $_SERVER["QUERY_STRING"] ? $_SERVER["QUERY_STRING"] : '{"errors":"Not Found"}';
 
 if ($q && strlen($q)==13 && is_numeric($q)) {
     if (!file_exists($q.".json")) {  

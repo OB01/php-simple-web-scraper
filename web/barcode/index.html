@@ -52,41 +52,25 @@
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
 
-    // Empty string
-    function isEmpty(value){
-    return (value == null || value.length === 0);
-    };
-
     // Search google
     function searchGoogle(term){
         document.querySelector('#search input[type=text]').value = term;
         document.querySelector('#search button').click();
     };
-
     // Load external data
     function loadData(url, callback){
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
-            console.log('response code: '+xhr.status);
+            console.log('response: '+xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
-                console.log(isEmpty(xhr.responseText));
-                var data = JSON.parse(xhr.responseText);
-                if (data) {
-                    console.log('data found');
-                    callback(data);
-                } else {
-                    console.log('no data found');
-                    callback(false);
-                }
+                callback(xhr);
             } else {
-                console.log('no data found');
                 callback(false);
             }
         };
         xhr.open('GET', url);
         xhr.send();
     };
-
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
@@ -123,15 +107,14 @@
                     console.log('scan code is 13 digits');
                     loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
                         console.log('load response: '+xhr.responseText);
-                        if(!xhr){
+                        if(!xhr || !xhr.responseText){
                             console.log("api didn't respond");
                             searchGoogle(result.text);
                         }
                         else{
-                            var data = xhr;
                             console.log('xhr response: '+xhr.responseText);
-                            
-                            if(!data || !data["name"] || isEmpty(data["name"])){
+                            var data = JSON.parse(xhr.responseText);
+                            if(!data || !data["name"]){
                                 console.log('name not found');
                                 searchGoogle(result.text);
                             }

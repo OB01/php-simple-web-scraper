@@ -69,14 +69,16 @@
         xhr.onload = function () {
             console.log('response code: '+xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
-                if(isEmpty(xhr.response)){
-                    console.log('response data is empty');
+                var data = JSON.parse(xhr.responseText);
+                if (data) {
+                    console.log('data found');
+                    callback(data);
+                } else {
+                    console.log('no data found');
                     callback(false);
-                }else{
-                    console.log('response data: '+xhr.response);
-                    callback(xhr);
-                };
+                }
             } else {
+                console.log('no data found');
                 callback(false);
             }
         };
@@ -125,8 +127,9 @@
                             searchGoogle(result.text);
                         }
                         else{
+                            var data = xhr.responseText;
                             console.log('xhr response: '+xhr.responseText);
-                            var data = JSON.parse(xhr.responseText);
+                            
                             if(!data || !data["name"] || isEmpty(data["name"])){
                                 console.log('name not found');
                                 searchGoogle(result.text);

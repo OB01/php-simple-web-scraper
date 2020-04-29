@@ -1,6 +1,4 @@
 <?php 
-header('Content-Type: application/json');
-
 $q = $_SERVER["QUERY_STRING"] ? $_SERVER["QUERY_STRING"] : 'no query';
 
 if ($q && strlen($q)==13 && is_numeric($q)) {

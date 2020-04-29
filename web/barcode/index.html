@@ -64,7 +64,7 @@
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(xhr);
             } else {
-                callback("No Data");
+                callback(false);
             }
         };
         xhr.open('GET', url);
@@ -108,7 +108,7 @@
                         if(xhr && xhr.responseText){
                             console.log('api responded');
                             var data = JSON.parse(xhr.responseText);
-                            if(data.hasOwnProperty('name')){
+                            if(data && data["name"]){
                                 var item = data["name"].en;
                                 console.log('name is: '+item);
                                 searchGoogle(item);

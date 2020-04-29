@@ -52,6 +52,24 @@
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
 
+    // Search google
+    function searchGoogle(term){
+        document.querySelector('#search input[type=text]').value = term;
+        document.querySelector('#search button').click();
+    };
+    // Load external data
+    function loadData(url, callback){
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                callback(xhr);
+            } else {
+                callback(false);
+            }
+        };
+        xhr.open('GET', url);
+        xhr.send();
+    };
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()
@@ -84,34 +102,31 @@
                 document.getElementById('result').textContent = result.text
                 
                 // Load external data
-                function loadData(url, callback){
-                    var xhr = new XMLHttpRequest();
-                    xhr.onload = function () {
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            callback(xhr);
-                        } else {
-                            callback(false);
-                        }
-                    };
-                    xhr.open('GET', url);
-                    xhr.send();
-                };
-                loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
-                    if(xhr){
-                        var data = JSON.parse(xhr.responseText);
-                        console.log(data["name"].en);
-                        if(!data["errors"]){
-                            var node = document.createElement("h2");
-                            var textnode = document.createTextNode(data["name"].en); 
-                            node.appendChild(textnode);   
-                            document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
-                        };
-                    };
-                });
+                if(!isNaN(result.text) && result.text.length == 13){
 
-                // Search google
-                document.querySelector('#search input[type=text]').value = result.text;
-                document.querySelector('#search button').click();
+                    loadData("https://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
+                        if(xhr){
+                            var data = JSON.parse(xhr.responseText);
+                            if(!data["errors"]){
+                                var item = data["name"].en;
+                                var node = document.createElement("h2");
+                                var textnode = document.createTextNode(item); 
+                                node.appendChild(textnode);   
+                                document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
+                                searchGoogle(item);
+                            }
+                            else{
+                                searchGoogle(result.text);
+                            };
+                        }
+                        else{
+                            searchGoogle(result.text);
+                        };
+                    });
+                }
+                else{
+                    searchGoogle(result.text);
+                };
               }
 
               if (err && !(err instanceof ZXing.NotFoundException)) {
@@ -134,9 +149,10 @@
         })
     })
   </script>
-
+<!--
 <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
+-->
 </body>
 
 </html>

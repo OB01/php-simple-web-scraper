@@ -64,16 +64,6 @@
     xhr.open('GET', url);
     xhr.send();
   };
-    loadData("http://key-chain.herokuapp.com/ean/?8713439215717", function(xhr) {
-        var data = JSON.parse(xhr.responseText);
-        console.log(data["name"].en);
-        if(!data["errors"]){
-            var node = document.createElement("h2");
-            var textnode = document.createTextNode(data["name"].en); 
-            node.appendChild(textnode);   
-            document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
-        };
-    });
 
     window.addEventListener('load', function () {
       let selectedDeviceId;
@@ -103,14 +93,28 @@
           document.getElementById('startButton').addEventListener('click', () => {
             codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
               if (result) {
-                console.log(result)
+                // Print result
                 document.getElementById('result').textContent = result.text
                 
+                // Load external data
+                if(!isNaN(result.text) && result.text.length == 13){
+                    loadData("http://key-chain.herokuapp.com/ean/?"+result.text, function(xhr) {
+                        var data = JSON.parse(xhr.responseText);
+                        console.log(data["name"].en);
+                        if(!data["errors"]){
+                            var node = document.createElement("h2");
+                            var textnode = document.createTextNode(data["name"].en); 
+                            node.appendChild(textnode);   
+                            document.getElementById("demo-content").insertBefore(node, document.getElementById("search"))
+                        };
+                    });
+                };
+
+                // Search google
                 document.querySelector('#search input[type=text]').value = result.text;
                 document.querySelector('#search button').click();
-
-
               }
+
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)
                 document.getElementById('result').textContent = err

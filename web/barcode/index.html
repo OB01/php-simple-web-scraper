@@ -52,11 +52,17 @@
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
 
+    // Empty string
+    function isEmpty(value){
+    return (value == null || value.length === 0);
+    };
+
     // Search google
     function searchGoogle(term){
         document.querySelector('#search input[type=text]').value = term;
         document.querySelector('#search button').click();
     };
+
     // Load external data
     function loadData(url, callback){
         var xhr = new XMLHttpRequest();
@@ -64,7 +70,11 @@
             console.log('response code: '+xhr.status);
             console.log('response data: '+xhr.response);
             if (xhr.status >= 200 && xhr.status < 300) {
-                callback(xhr);
+                if(isEmpty(xhr.response)){
+                    callback(false);
+                }else{
+                    callback(xhr);
+                };
             } else {
                 callback(false);
             }
@@ -72,6 +82,7 @@
         xhr.open('GET', url);
         xhr.send();
     };
+
     window.addEventListener('load', function () {
       let selectedDeviceId;
       const codeReader = new ZXing.BrowserMultiFormatReader()

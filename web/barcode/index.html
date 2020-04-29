@@ -95,11 +95,7 @@
                     var xhr = new XMLHttpRequest();
                     xhr.onload = function () {
                         if (xhr.status >= 200 && xhr.status < 300) {
-                            if (xhr.responseText && xhr.responseText.length > 0) {
-                                
-                                console.log(xhr.responseText);
-                                console.log(JSON.stringify(xhr.responseText));
-                                console.log(JSON.parse(xhr.responseText));
+                            if (xhr.responseText && xhr.responseText.length > 5) {
                                 var data = JSON.parse(xhr.responseText);
                                 if(!data["errors"]){
                                     var item = data["name"].en;
